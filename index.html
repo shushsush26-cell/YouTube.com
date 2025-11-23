@@ -13,7 +13,8 @@ document.getElementById('messageForm').addEventListener('submit', async function
     submitBtn.disabled = true;
 
     try {
-        // ПРЯМАЯ отправка в Telegram API (работает не во всех браузерах)
+        console.log('Начинаем отправку...');
+        
         const response = await fetch('https://api.telegram.org/bot8591266062:AAEwMbSDWQXYmZ6W9CekGxlnJUqRQIB0v8M/sendMessage', {
             method: 'POST',
             headers: {
@@ -25,20 +26,23 @@ document.getElementById('messageForm').addEventListener('submit', async function
             })
         });
 
+        console.log('Ответ получен:', response);
+
         const result = await response.json();
+        console.log('Результат:', result);
 
         if (result.ok) {
             statusDiv.textContent = '✅ Сообщение отправлено в Telegram!';
             statusDiv.className = 'success';
             form.reset();
         } else {
-            statusDiv.textContent = '❌ Ошибка: ' + (result.description || 'Неизвестная ошибка');
+            statusDiv.textContent = '❌ Ошибка Telegram: ' + (result.description || 'Неизвестная ошибка');
             statusDiv.className = 'error';
         }
 
     } catch (error) {
-        console.error('Ошибка:', error);
-        statusDiv.textContent = '❌ Не удалось отправить сообщение. Нужен сервер.';
+        console.error('Полная ошибка:', error);
+        statusDiv.textContent = '❌ Ошибка сети: ' + error.message;
         statusDiv.className = 'error';
     }
 
