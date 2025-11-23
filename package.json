@@ -1,15 +1,11 @@
 {
-  "name": "my-telegram-site",
+  "name": "youtube",
   "version": "1.0.0",
-  "description": "Site for sending messages to Telegram",
-  "scripts": {
-    "build": "echo 'No build step needed'",
-    "vercel-build": "echo 'No build step needed'"
-  },
-  "static": true
-}
-{
+  "type": "module",
   "dependencies": {
-    "node-fetch": "^2.6.7"
+    "node-fetch": "^3.3.2"
+  },
+  "scripts": {
+    "dev": "vercel dev"
   }
 }
